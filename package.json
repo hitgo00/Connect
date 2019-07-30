@@ -1,0 +1,24 @@
+{
+  "name": "connect",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hitgo00/Connect.git"
+  },
+  "keywords": [
+    "node",
+    "socket",
+    "express"
+  ],
+  "author": "HitGo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hitgo00/Connect/issues"
+  },
+  "homepage": "https://github.com/hitgo00/Connect#readme"
+}
