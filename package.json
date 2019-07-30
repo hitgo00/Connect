@@ -20,5 +20,11 @@
   "bugs": {
     "url": "https://github.com/hitgo00/Connect/issues"
   },
-  "homepage": "https://github.com/hitgo00/Connect#readme"
+  "homepage": "https://github.com/hitgo00/Connect#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.0.4",
+    "http": "0.0.0",
+    "socket.io": "^2.2.0"
+  }
 }
