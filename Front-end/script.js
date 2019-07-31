@@ -27,6 +27,14 @@ $(()=>{
         inputMessage.show()
         login.hide()
         sendMessage.show()
+
+        $.get( "/logged", ( messages ) =>{
+            messages.forEach(data => {
+                console.log(data)
+                msgList.append(`<li> ${data.username}:${data.message} </li>`)
+            });
+            alert( "Load was performed." );
+          });
     })
     sendMessage.click(()=>{
         socket.emit('send_M',{
@@ -36,12 +44,9 @@ $(()=>{
     })
 
     socket.on('receive_M',(data)=>{
+        console.log(data)
         msgList.append(`<li> ${data.username}:${data.message} </li>`)
     })
 })
 
 
-// use a model (sequelize) to create chat app
-// make mapping of socket id and username
-// flow
-// install mongodb
