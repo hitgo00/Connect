@@ -10,19 +10,17 @@ const server = http.createServer(app)
 
 const io = socket(server)
 
-var addMsg=function (username,message){
-    connectdb('chatApp')
-    .then((db)=>{
-
-        const msg=db.collection('messages')
-        return msg.insertOne({
+var addMsg= async function (username,message){
+    db=await connectdb('chatApp')
+    const msg=db.collection('messages')
+    const result=await msg.insertOne({
             username:username,
             message:message
     })
-    .then (result=>console.log(result))
-})}
+    console.log(result)
+}
 
-// var viewMsg=function(){
+
     async function readMsgs() {
         db=await connectdb('chatApp')
         const msg = db.collection('messages')

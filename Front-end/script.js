@@ -33,7 +33,7 @@ $(()=>{
                 console.log(data)
                 msgList.append(`<li> ${data.username}:${data.message} </li>`)
             });
-            alert( "Load was performed." );
+
           });
     })
     sendMessage.click(()=>{
