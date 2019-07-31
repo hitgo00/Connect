@@ -31,7 +31,7 @@ $(()=>{
         $.get( "/logged", ( messages ) =>{
             messages.forEach(data => {
                 console.log(data)
-                msgList.append(`<li> ${data.username}:${data.message} </li>`)
+                msgList.append(`<li class="list-group-item"> ${data.username}:${data.message} </li>`)
             });
 
           });
@@ -40,12 +40,13 @@ $(()=>{
         socket.emit('send_M',{
             message:inputMessage.val()
         })
+        inputMessage.val("")
 
     })
 
     socket.on('receive_M',(data)=>{
         console.log(data)
-        msgList.append(`<li> ${data.username}:${data.message} </li>`)
+        msgList.append(`<li class="list-group-item"> ${data.username}:${data.message} </li>`)
     })
 })
 
