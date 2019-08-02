@@ -4,18 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Sign Up</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+<div class="container">
+  <h1 align="center"> Let's Connect</h1>
+  <div class="col-md-3 mx-auto text-center mt-5">
 
-  <h1>Sign Up</h1>
+  <h3>Sign Up</h1>
 
   <form action="/signup" method="POST">
-    <input name="username" placeholder="username">
-    <input name="email" type="email" placeholder="email">
-    <input name="password" type="password" placeholder="password">
-    <button type="submit">Sign Up</button>
+    <div class="form-group">
+    <label >Username</label>
+    <input type="text" name="username" placeholder="username" required class="form-control" placeholder="Enter username">
+   </div>
+
+   <div class="form-group">
+    <label>Email</label>
+    <input name="email" type="email" placeholder="Enter email address" class="form-control" required>
+   </div>
+
+    <div class="form-group">
+    <label>Password</label>
+    <input name="password" type="password" placeholder=" Enter password" required class="form-control" >
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Account</button>
   </form>
+
+  <br>
+  <p>Already have an account </p>
+  <button class="btn btn-outline-dark" > <a href="./"> Login</a></button>
 
 </body>
 </html>

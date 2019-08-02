@@ -49,7 +49,8 @@ var addMsg= async function (username,message){
     const messages=db.collection('messages')
     const result=await messages.insertOne({
             username:username,
-            message:message
+            message:message,
+            date:new Date()
     })
     console.log(result)
 }
@@ -58,7 +59,7 @@ var addMsg= async function (username,message){
 async function readMsgs() {
     db=await connectdb('chatApp')
     const messages = db.collection('messages')
-    const msgArr = await messages.find({}).toArray()
+    const msgArr = await messages.find({}).sort({date: -1}).toArray()
     const allMsg=[]
     msgArr.forEach((m) => allMsg.push((m)))
 
@@ -66,8 +67,17 @@ async function readMsgs() {
 }
 
 
+function validateEmail(email) {
+  var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+
+
+
 app.get('/signup', (req, res) => res.render('signup'))
 app.post('/signup', async(req, res) => {
+
+  if(validateEmail(req.body.email)){
     db=await connectdb('chatApp')
     const Users=db.collection('users')
   Users.insertOne({
@@ -77,30 +87,39 @@ app.post('/signup', async(req, res) => {
   })
     .then((user) => {
       console.log(user)
-      res.redirect('/login')
+      res.redirect('/')
     })
     .catch((err) => {
       console.error(err)
       res.redirect('/signup')
     })
+  }
+  else{
+    res.redirect('/signup')
+  }
+
 })
 
 
-app.get('/login', (req, res) => res.render('login'))
+app.get('/', (req, res) => res.render('login'))
 
-app.post( '/login',
+app.post( '/',
   passport.authenticate('local', {
     successRedirect: '/home',
-    failureRedirect: '/login',
+    failureRedirect: '/',
   }),
 )
 
+
+ let username
 function checkLoggedIn(req, res, next) {
+
     if (req.user) {
+      username=(req.user.username)
       return next()
     }
-    res.redirect('/login')
-  }
+    res.redirect('/')
+}
 
 
 
@@ -112,26 +131,22 @@ app.get('/logged',checkLoggedIn,(req,res)=>{
 })
 
 io.on('connection', (socket) => {
-    console.log("Connection Established ", socket.id )
+  console.log("Connection Established ", socket.id )
+  let userName=username
 
-    socket.on("send_ID",(data)=>{
-        let userName=data.username
-        // let userName=req.user.username
+  socket.on("send_M",(data)=>{
+    console.log("data received ",data.message)
+    addMsg(userName,data.message)
 
-        socket.on("send_M",(data)=>{
-            console.log("data received ",data.message)
-            addMsg(userName,data.message)
-
-
-            io.emit("receive_M",{
-                username:userName,
-                message:data.message
-            })
-        })
+    io.emit("receive_M",{
+      username:userName,
+      message:data.message
     })
+  })
+
 })
 
-app.use('/home', express.static(__dirname + '/front-end'))
+app.use('/home',checkLoggedIn, express.static(__dirname + '/front-end'))
 
 
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>ChatApp</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -17,23 +17,18 @@
     <script src="script.js"></script>
 </head>
 <body>
+    <div class="container">
     <h1 align="center"> Let's Connect</h1>
-    <div class="input-group mb-3 ml-.5 ">
-        <input type="text" id="username" placeholder="enter username" aria-describedby="button-addon2">
+
+
+    <div class="input-group mb-3 ml-0 " >
+        <input type="text" id="chatMessage" placeholder="new Message" class="form-control">
         <div class="input-group-append">
-            <button id="login" class="btn btn-outline-secondary" type="button" id="button-addon2">Login</button>
-        </div>
-        <input type="text" id="chatMessage" placeholder="new Message" aria-describedby="button-addon2">
-        <div class="input-group-append">
-                <button id="sendMessage" class="btn btn-outline-secondary" type="button" id="button-addon2">Send</button>
+                <button id="sendMessage" class="btn btn-outline-secondary" type="button">Send</button>
         </div>
     </div>
+    </div>
 
-<!--
-    <input type="text" id="username" placeholder="enter username">
-    <input type="text" id="chatMessage" placeholder="new Message">
-    <button id="sendMessage" class="btn btn-outline-secondary" type="button" id="button-addon2">Send</button>
-    <button id="login" class="btn btn-outline-secondary" type="button" id="button-addon2">Login</button> -->
     <ul id="msgList" class="list-group"></ul>
 </body>
 </html>
