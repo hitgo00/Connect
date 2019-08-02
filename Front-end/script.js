@@ -2,7 +2,7 @@ console.log("frontend running ")
 
 let socket=io()
 
-socket.on('connected',()=>{
+socket.on('connection',()=>{
     console.log(socket.id)
 })
 
