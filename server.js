@@ -38,10 +38,6 @@ app.use(passport.session())
 
 
 
-
-
-
-
 const io = socket(server)
 
 var addMsg= async function (username,message){
@@ -78,6 +74,8 @@ app.get('/signup', (req, res) => res.render('signup'))
 app.post('/signup', async(req, res) => {
 
   if(validateEmail(req.body.email)){
+
+
     db=await connectdb('chatApp')
     const Users=db.collection('users')
   Users.insertOne({
@@ -94,8 +92,11 @@ app.post('/signup', async(req, res) => {
       res.redirect('/signup')
     })
   }
+
+
   else{
-    res.redirect('/signup')
+      let errorM="enter a valid email"
+      res.render('signup',{errorM})
   }
 
 })

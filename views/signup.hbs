@@ -37,6 +37,13 @@
   <br>
   <p>Already have an account </p>
   <button class="btn btn-outline-dark" > <a href="./"> Login</a></button>
+  <br>
+  {{#if errorM}}
+  <div class="alert alert-danger mt-2" role="alert">
+    {{errorM}}
+  </div>
+  {{/if}}
+
 
 </body>
 </html>
