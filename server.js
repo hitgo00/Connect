@@ -165,7 +165,12 @@ io.on('connection', (socket) => {
 
 })
 
-app.use('/home',checkLoggedIn, express.static(__dirname + '/front-end'))
+app.use('/home',checkLoggedIn, express.static(__dirname + '/Front-end'))
+
+
+app.get('/home',checkLoggedIn,(req,res)=>{
+  res.sendFile(path.join(__dirname, '../Front-end/index.html'));
+})
 
 const port = process.env.PORT || 4848
 
