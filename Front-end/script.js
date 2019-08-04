@@ -17,7 +17,10 @@ $(()=>{
     $.get( "/logged", ( messages ) =>{
 
         messages.forEach(data => {
-            msgList.append(`<li class="list-group-item"> ${data.username}:${data.message} </li>`)
+            var str = data.date
+            var date = new Date(str);
+            dateTime=`${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}  `
+            msgList.append(`<li class="list-group-item"> (${dateTime})${data.username}: ${data.message}  </li>`)
         });
 
     });
@@ -34,7 +37,10 @@ $(()=>{
 
     socket.on('receive_M',(data)=>{
         console.log(data)
-        msgList.prepend(`<li class="list-group-item"> ${data.username}:${data.message} </li>`)
+        var str = data.date
+            var date = new Date(str);
+            dateTime=`${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}  `
+            msgList.prepend(`<li class="list-group-item"> (${dateTime})${data.username}: ${data.message}  </li>`)
     })
 })
 

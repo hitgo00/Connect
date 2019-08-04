@@ -78,21 +78,37 @@ app.post('/signup', async(req, res) => {
 
     db=await connectdb('chatApp')
     const Users=db.collection('users')
-  Users.insertOne({
-    username: req.body.username,
-    email: req.body.email,
-    password: req.body.password,
-  })
-    .then((user) => {
-      console.log(user)
-      res.redirect('/')
-    })
-    .catch((err) => {
-      console.error(err)
-      res.redirect('/signup')
-    })
-  }
 
+
+
+  Users.findOne({username:req.body.username})
+  .then(user=>{
+    if(user){
+    let errorM="username already taken"
+    res.render('signup',{errorM})
+    }
+
+    else{
+      Users.insertOne({
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+      })
+        .then((user) => {
+          console.log(user)
+          res.redirect('/')
+        })
+        .catch((err) => {
+          console.error(err)
+          res.redirect('/signup')
+        })
+
+    }
+
+  })
+  .catch(err=>{console.log(err)})
+
+  }
 
   else{
       let errorM="enter a valid email"
@@ -108,6 +124,7 @@ app.post( '/',
   passport.authenticate('local', {
     successRedirect: '/home',
     failureRedirect: '/',
+    // failureFlash : true
   }),
 )
 
@@ -141,7 +158,8 @@ io.on('connection', (socket) => {
 
     io.emit("receive_M",{
       username:userName,
-      message:data.message
+      message:data.message,
+      date: new Date()
     })
   })
 
