@@ -167,8 +167,8 @@ io.on('connection', (socket) => {
 
 app.use('/home',checkLoggedIn, express.static(__dirname + '/front-end'))
 
+const port = process.env.PORT || 4848
 
-
-server.listen(4848, () => {
-    console.log("Server started on http://localhost:4848")
+server.listen(port, () => {
+    console.log("Server started on http://localhost:"+ port)
 })
