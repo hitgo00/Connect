@@ -12,7 +12,10 @@ $(()=>{
 
     let sendMessage=$('#sendMessage')
 
+    let loader=$('#loader')
+
     let msgList=$('#msgList')
+
 
     $.get( "/logged", ( messages ) =>{
 
@@ -22,8 +25,10 @@ $(()=>{
             dateTime=`${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}  `
             msgList.append(`<li class="list-group-item"> (${dateTime})${data.username}: ${data.message}  </li>`)
         });
+        loader.hide()
 
     });
+
 
     sendMessage.click(()=>{
         if(inputMessage.val()){
