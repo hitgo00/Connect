@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+
+.heading{
+    color: green;
+}
+#sendMessage{
+    font-family: 'Syne Mono', monospace;
+    color: green;
+}
+.form-control{
+    background-color: black;
+}
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: green;
+    opacity: 1; /* Firefox */
+  }
+.btn-outline-secondary{
+    font-family: 'Syne Mono', monospace;
+    color: green;
+}
+body{
+    font-family: 'Syne Mono', monospace;
+    background-color: black;
+    color: green;
+}
